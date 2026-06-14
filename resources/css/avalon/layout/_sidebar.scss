@@ -1,0 +1,157 @@
+.layout-sidebar {
+    position: static;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    width: var(--avalon-sidebar-width);
+    background: transparent;
+    border-radius: 0 1.5rem 1.5rem 0;
+    box-shadow: rgba(18, 18, 23, 0.05) 0px 1px 2px 0px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.layout-sidebar-collapsed {
+    width: var(--avalon-sidebar-collapsed-width);
+}
+
+.layout-sidebar-collapsed .sidebar-header {
+    justify-content: center;
+    padding: 0;
+}
+
+.layout-sidebar-collapsed .logo {
+    gap: 0;
+}
+
+.layout-sidebar-collapsed .layout-logo-text,
+.layout-sidebar-collapsed .layout-menuitem-root-text,
+.layout-sidebar-collapsed .layout-menuitem-text {
+    display: none;
+}
+
+.layout-sidebar-collapsed .layout-menuitem-link {
+    justify-content: center;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+}
+
+.layout-sidebar-collapsed .layout-menuitem-icon {
+    margin: 0;
+    width: auto;
+}
+
+.layout-sidebar-collapsed .menu-separator {
+    margin: 0.875rem 0.5rem;
+}
+
+.sidebar-header {
+    height: var(--avalon-topbar-height);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    flex-shrink: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--p-text-color);
+}
+
+.logo-image {
+    width: 1.75rem;
+    height: 2rem;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.layout-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.layout-root-menuitem {
+    display: flex;
+    flex-direction: column;
+}
+
+.layout-menuitem-root-text {
+    padding: 0 0 0.5rem 0;
+    margin: 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    color: var(--avalon-menu-group-color);
+}
+
+.layout-root-menuitem > .layout-menuitem-link {
+    display: none;
+}
+
+.layout-root-submenulist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.layout-menuitem-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    margin: 0 1rem;
+    border-radius: 0.75rem;
+    color: var(--p-text-color);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background 0.15s ease, color 0.15s ease;
+    cursor: pointer;
+}
+
+.layout-menuitem-link:hover {
+    background: var(--avalon-menu-active-bg);
+    color: var(--avalon-menu-active-color);
+}
+
+.layout-menuitem-link.active-route,
+.layout-menuitem-link.router-link-active {
+    background: var(--avalon-menu-active-bg);
+    color: var(--avalon-menu-active-color);
+}
+
+.layout-menuitem-icon {
+    font-size: 1rem;
+    width: 1.25rem;
+    text-align: center;
+}
+
+.layout-submenu-toggler {
+    margin-left: auto;
+    font-size: 0.875rem;
+}
+
+.menu-separator {
+    height: 1px;
+    margin: 0.875rem 1rem;
+    background: var(--avalon-border-color);
+    list-style: none;
+}

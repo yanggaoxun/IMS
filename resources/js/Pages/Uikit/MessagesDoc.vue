@@ -1,0 +1,74 @@
+<script setup>
+import { useToast } from 'primevue/usetoast';
+import { ref } from 'vue';
+
+const toast = useToast();
+const message = ref([]);
+const username = ref(null);
+const email = ref(null);
+
+function showSuccess() {
+    toast.add({ severity: 'success', summary: 'Success Message', detail: 'Message Detail', life: 3000 });
+}
+
+function showInfo() {
+    toast.add({ severity: 'info', summary: 'Info Message', detail: 'Message Detail', life: 3000 });
+}
+
+function showWarn() {
+    toast.add({ severity: 'warn', summary: 'Warn Message', detail: 'Message Detail', life: 3000 });
+}
+
+function showError() {
+    toast.add({ severity: 'error', summary: 'Error Message', detail: 'Message Detail', life: 3000 });
+}
+</script>
+
+<template>
+    <div class="grid grid-cols-12 gap-6">
+        <div class="col-span-12 lg:col-span-6">
+            <div class="card flex flex-col gap-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-lg">Toast</h3>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <Button @click="showSuccess()" label="Success" severity="success" />
+                    <Button @click="showInfo()" label="Info" severity="info" />
+                    <Button @click="showWarn()" label="Warn" severity="warn" />
+                    <Button @click="showError()" label="Error" severity="danger" />
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-lg">Inline</h3>
+                </div>
+                <div class="flex flex-wrap mb-4 gap-2">
+                    <InputText v-model="username" placeholder="Username" aria-label="username" invalid />
+                    <Message severity="error">Username is required</Message>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <InputText v-model="email" placeholder="Email" aria-label="email" invalid />
+                    <Message severity="error" icon="pi pi-times-circle" />
+                </div>
+            </div>
+        </div>
+        <div class="col-span-12 lg:col-span-6">
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-lg">Message</h3>
+                </div>
+                <div class="flex flex-col gap-4 mb-4">
+                    <Message severity="success">Success Message</Message>
+                    <Message severity="info">Info Message</Message>
+                    <Message severity="warn">Warn Message</Message>
+                    <Message severity="error">Error Message</Message>
+                    <Message severity="secondary">Secondary Message</Message>
+                    <Message severity="contrast">Contrast Message</Message>
+                </div>
+
+                <transition-group name="p-message" tag="div">
+                    <Message v-for="msg of message" :severity="msg.severity" :key="msg.content">{{ msg.content }}</Message>
+                </transition-group>
+            </div>
+        </div>
+    </div>
+</template>

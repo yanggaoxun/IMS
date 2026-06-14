@@ -1,0 +1,38 @@
+html {
+    height: 100%;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+body {
+    font-family: 'Archivo', sans-serif;
+    color: var(--p-text-color);
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.layout-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    height: 100dvh;
+    padding: 0.5rem;
+    background-color: var(--avalon-content-bg);
+    overflow: hidden;
+}
+
+.scrollable-content {
+    flex: 1 1 0%;
+    overflow: auto;
+    padding: 1.25rem;
+}

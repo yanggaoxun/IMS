@@ -1,0 +1,79 @@
+.layout-content-wrapper {
+    flex: 1 1 auto;
+    max-width: 107.5rem;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--avalon-main-bg);
+    border-radius: 1.5rem;
+    box-shadow: var(--avalon-card-shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.layout-content-header {
+    max-height: 3.5rem;
+    padding: 0.875rem 1rem 0.875rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--avalon-border-color);
+    flex-shrink: 0;
+}
+
+.layout-content-header i {
+    color: var(--avalon-text-muted);
+    font-size: 1rem;
+}
+
+.layout-content-header .breadcrumb-item {
+    color: var(--avalon-text-muted);
+    font-weight: 400;
+}
+
+.layout-content-header .breadcrumb-item.active {
+    color: var(--p-text-color);
+    font-weight: 500;
+}
+
+.layout-main {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.card {
+    background: var(--avalon-card-bg);
+    border-radius: 1rem;
+    box-shadow: var(--avalon-stroke-shadow);
+    padding: 0;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    max-height: 3.5rem;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--avalon-border-color);
+    flex-shrink: 0;
+}
+
+.card-header h3 {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--p-text-color);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.card-body {
+    padding: 1.25rem;
+    flex: 1 1 auto;
+}
