@@ -1,0 +1,30 @@
+:root {
+    --avalon-sidebar-width: 17rem;
+    --avalon-sidebar-collapsed-width: 5rem;
+    --avalon-topbar-height: 3.5rem;
+    --avalon-content-bg: #eff6ff;
+    --avalon-main-bg: #ffffff;
+    --avalon-card-bg: #ffffff;
+    --avalon-card-radius: 1.25rem;
+    --avalon-card-shadow:
+        0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 0 rgba(0, 0, 0, 0),
+        rgba(164, 172, 185, 0.24) 0px 1px 2px 0px,
+        rgba(18, 55, 105, 0.08) 0px 0px 0px 1px;
+    --avalon-border-color: #e2e8f0;
+    --avalon-text-muted: #64748b;
+    --avalon-menu-active-bg: #3b82f6;
+    --avalon-menu-active-color: #ffffff;
+    --avalon-menu-group-color: #64748b;
+    --avalon-topbar-bg: transparent;
+    --avalon-topbar-shadow: none;
+    --avalon-stroke-shadow:
+        0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 0 rgba(0, 0, 0, 0),
+        0 0 0 0 rgba(0, 0, 0, 0),
+        rgba(164, 172, 185, 0.24) 0px 1px 2px 0px,
+        rgba(18, 55, 105, 0.08) 0px 0px 0px 1px;
+}
