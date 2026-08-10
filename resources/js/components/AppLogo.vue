@@ -40,7 +40,6 @@ const { t } = useI18n();
             <circle cx="10" cy="14" r="1.5" fill="currentColor" />
         </svg>
         <span class="layout-logo-text logo-text">{{ t('brand.name') }}</span>
-        <span class="layout-logo-text brand-short text-primary-500 bg-primary-500/10">{{ t('brand.shortName') }}</span>
     </a>
 </template>
 
@@ -63,9 +62,6 @@ const { t } = useI18n();
     font-size: 1.25rem;
     font-weight: 700;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 12rem;
 }
 
 .brand-short {

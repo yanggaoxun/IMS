@@ -27,7 +27,16 @@ const notificationsOpen = ref(false);
                 <i class="pi pi-bars"></i>
             </button>
             <span class="topbar-separator hidden sm:block"></span>
-            <div class="page-title hidden sm:block">{{ t('topbar.title') }}</div>
+            <div class="page-title hidden sm:flex items-center gap-2 text-sm">
+                <span><i class="pi pi-home text-surface-400 text-xs"></i></span>
+                <div class="flex items-center gap-2 text-surface-400 font-normal">
+                    <span class="leading-none">{{ t('nav.dashboards') }}</span>
+                    <span><i class="pi pi-chevron-right !text-[10px] !leading-none"></i></span>
+                </div>
+                <div class="flex items-center gap-2 text-surface-950 dark:text-surface-0 font-medium">
+                    <span class="leading-none">{{ t('nav.dashboard') }}</span>
+                </div>
+            </div>
         </div>
 
         <div class="topbar-right">

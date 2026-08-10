@@ -7,12 +7,13 @@
     z-index: 40;
     background: transparent;
     border: none;
+    border-bottom: 1px solid var(--avalon-border-color);
     border-radius: 0;
     box-shadow: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1rem 0.75rem 1.25rem;
+    padding: 1rem 1.25rem;
     flex-shrink: 0;
 }
 
