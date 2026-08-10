@@ -1,8 +1,8 @@
-# ICMS Agent Guide
+# IMS Agent Guide
 
 ## Project Overview
 
-ICMS (Intelligent Cabin Management System / 智能方舱管理系统) is a Laravel 12 admin dashboard using Inertia.js, Vue 3, PrimeVue 4, and Tailwind CSS 4. The UI is built around a custom PrimeVue "Avalon" theme with a fixed sidebar, floating/collapsible topbar, and Chinese/English i18n support.
+IMS (Intelligent  Management System / 智能管理系统) is a Laravel 12 admin dashboard using Inertia.js, Vue 3, PrimeVue 4, and Tailwind CSS 4. The UI is built around a custom PrimeVue "Avalon" theme with a fixed sidebar, floating/collapsible topbar, and Chinese/English i18n support.
 
 ## Tech Stack
 
@@ -123,13 +123,10 @@ php artisan route:list # Verify routes
 
 ## Known Issues & Gotchas
 
-- **UI Kit routes missing**: `AppMenu.vue` links to `/uikit/*` but no routes exist in `routes/web.php`.
 - **Broken router-link usage**: `Auth/Error.vue` and `Auth/Access.vue` use `as="router-link"` with `to="/"`. Replace with Inertia `Link`.
 - **`AppConfigurator.vue` references missing `changeMenuMode`**: `useLayout()` does not export this.
 - **Duplicate CSS in `resources/css/app.css`**: `@source`, `@theme`, and `@import` blocks are duplicated, plus a duplicate import of Avalon SCSS.
-- **Feature test fails**: `tests/Feature/ExampleTest.php` expects `GET /` to return 200, but `/` requires auth (returns 302).
 - **SSR enabled but no bundle**: `config/inertia.php` has SSR enabled, but `bootstrap/ssr/ssr.mjs` does not exist.
-- **Orphaned pages**: `Welcome.vue` has no route.
 - **README is default Laravel skeleton**: not project-specific.
 
 ## Security Notes
