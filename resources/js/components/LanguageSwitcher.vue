@@ -42,5 +42,6 @@ const selectedLanguage = computed({
         :placeholder="t('language.switchLanguage')"
         :aria-label="t('language.switchLanguage')"
         class="w-32"
+        size="small"
     />
 </template>
