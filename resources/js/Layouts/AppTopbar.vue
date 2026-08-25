@@ -1,10 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { pageLabelKeys, useLayout } from './composables/layout';
-import { router, usePage } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
-const { toggleMenu, toggleDarkMode, isDarkTheme, layoutState } = useLayout();
+const { toggleMenu } = useLayout();
 const { t } = useI18n();
 const page = usePage();
 const authUser = computed(() => page.props.auth?.user);
@@ -43,10 +43,6 @@ const pageTitle = computed(() => t(pageLabelKeys(page.url).current));
                     <i class="pi pi-bars"></i>
                 </button>
 
-                <button type="button" class="app-config-button" @click="toggleDarkMode">
-                    <i :class="['pi', isDarkTheme ? 'pi-moon' : 'pi-sun']"></i>
-                </button>
-
                 <div class="relative">
                     <Button
                         icon="pi pi-bell"
@@ -80,6 +76,13 @@ const pageTitle = computed(() => t(pageLabelKeys(page.url).current));
                         v-if="userMenuOpen"
                         class="absolute right-0 top-full mt-2 min-w-[140px] bg-white border border-slate-200 rounded-xl shadow-lg py-2 z-50"
                     >
+                        <Link
+                            href="/profile"
+                            class="w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors flex items-center gap-2 text-surface-700 no-underline"
+                        >
+                            <i class="pi pi-user"></i>
+                            <span>{{ t('topbar.profile') }}</span>
+                        </Link>
                         <button
                             type="button"
                             class="w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors flex items-center gap-2 text-red-500"

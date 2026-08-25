@@ -9,6 +9,7 @@ import { AvalonPreset } from './theme/avalon-preset';
 import ToastService from 'primevue/toastservice';
 import ConfirmationService from 'primevue/confirmationservice';
 import Toast from 'primevue/toast';
+import ConfirmDialog from 'primevue/confirmdialog';
 import StyleClass from 'primevue/styleclass';
 import AppLayout from './Layouts/AppLayout.vue';
 import i18n from './locales';
@@ -35,15 +36,13 @@ createInertiaApp({
             .use(i18n)
             .use(PrimeVue, {
                 theme: {
-                    preset: AvalonPreset,
-                    options: {
-                        darkModeSelector: '.app-dark'
-                    }
+                    preset: AvalonPreset
                 }
             })
             .use(ToastService)
             .use(ConfirmationService)
             .component('Toast', Toast)
+            .component('ConfirmDialog', ConfirmDialog)
             .directive('styleclass', StyleClass);
 
         return app.mount(el);

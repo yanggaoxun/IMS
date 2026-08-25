@@ -76,4 +76,23 @@ export default {
         name: 'IMS',
         shortName: 'IMS',
     },
+    profile: {
+        title: '个人资料',
+        info: '基本信息',
+        name: '姓名',
+        email: '邮箱',
+        changePassword: '修改密码',
+        currentPassword: '当前密码',
+        newPassword: '新密码',
+        confirmPassword: '确认新密码',
+        updated: '资料已更新',
+        passwordUpdated: '密码已修改',
+    },
+    errors: {
+        backHome: '返回首页',
+        403: { title: '访问被拒绝', description: '你没有权限访问此页面。' },
+        404: { title: '页面不存在', description: '你访问的页面不存在。' },
+        500: { title: '服务器错误', description: '服务器出现问题，请稍后再试。' },
+        503: { title: '服务不可用', description: '服务暂时不可用，请稍后再试。' },
+    },
 };

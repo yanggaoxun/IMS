@@ -76,4 +76,23 @@ export default {
         name: 'IMS',
         shortName: 'IMS',
     },
+    profile: {
+        title: 'Profile',
+        info: 'Profile Information',
+        name: 'Name',
+        email: 'Email',
+        changePassword: 'Change Password',
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        confirmPassword: 'Confirm New Password',
+        updated: 'Profile updated',
+        passwordUpdated: 'Password updated',
+    },
+    errors: {
+        backHome: 'Back to Home',
+        403: { title: 'Access Denied', description: 'You do not have permission to access this page.' },
+        404: { title: 'Page Not Found', description: 'The page you are looking for does not exist.' },
+        500: { title: 'Server Error', description: 'Something went wrong on our side. Please try again later.' },
+        503: { title: 'Service Unavailable', description: 'The service is temporarily unavailable. Please try again later.' },
+    },
 };

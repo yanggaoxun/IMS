@@ -18,7 +18,7 @@ const containerClass = computed(() => ({
 
 const breadcrumb = computed(() => {
     const keys = pageLabelKeys(page.url);
-    return { group: t(keys.group), current: t(keys.current) };
+    return { group: keys.group ? t(keys.group) : null, current: t(keys.current) };
 });
 </script>
 
@@ -29,8 +29,10 @@ const breadcrumb = computed(() => {
             <AppTopbar />
             <div class="layout-content-header">
                 <i class="pi pi-home"></i>
-                <span class="breadcrumb-item">{{ breadcrumb.group }}</span>
-                <i class="pi pi-chevron-right !text-xs"></i>
+                <template v-if="breadcrumb.group">
+                    <span class="breadcrumb-item">{{ breadcrumb.group }}</span>
+                    <i class="pi pi-chevron-right !text-xs"></i>
+                </template>
                 <span class="breadcrumb-item active">{{ breadcrumb.current }}</span>
             </div>
             <div class="scrollable-content">
@@ -43,4 +45,5 @@ const breadcrumb = computed(() => {
         <div class="layout-mask" @click="hideMobileMenu" />
     </div>
     <Toast />
+    <ConfirmDialog />
 </template>
