@@ -37,7 +37,7 @@ export default {
         sent: 'Sent',
     },
     topbar: {
-        title: 'ICMS',
+        title: 'IMS',
         search: 'Search...',
         logout: 'Logout',
         calendar: 'Calendar',
@@ -61,7 +61,7 @@ export default {
         switchLanguage: 'Switch Language',
     },
     login: {
-        welcome: 'Welcome to ICMS!',
+        welcome: 'Welcome to IMS!',
         signInToContinue: 'Sign in to continue',
         email: 'Email',
         emailPlaceholder: 'Email address',
@@ -73,7 +73,7 @@ export default {
         errorCredentials: 'The provided credentials do not match our records.',
     },
     brand: {
-        name: 'ICMS',
-        shortName: 'ICMS',
+        name: 'IMS',
+        shortName: 'IMS',
     },
 };

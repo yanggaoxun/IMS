@@ -61,7 +61,7 @@ export default {
         switchLanguage: '切换语言',
     },
     login: {
-        welcome: '欢迎来到 ICMS!',
+        welcome: '欢迎来到 IMS!',
         signInToContinue: '登录以继续',
         email: '邮箱',
         emailPlaceholder: '请输入邮箱',
@@ -73,7 +73,7 @@ export default {
         errorCredentials: '邮箱或密码不正确，请重试。',
     },
     brand: {
-        name: 'ICMS',
-        shortName: 'ICMS',
+        name: 'IMS',
+        shortName: 'IMS',
     },
 };
