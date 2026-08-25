@@ -21,6 +21,31 @@ const layoutState = reactive({
     activePath: null,
 });
 
+const uikitLabelKeys = {
+    formlayout: 'nav.formLayout',
+    input: 'nav.input',
+    button: 'nav.button',
+    table: 'nav.table',
+    list: 'nav.list',
+    tree: 'nav.tree',
+    panels: 'nav.panels',
+    overlay: 'nav.overlay',
+    media: 'nav.media',
+    menu: 'nav.menu',
+    messages: 'nav.messages',
+    misc: 'nav.misc',
+    chart: 'nav.chart',
+    timeline: 'nav.timeline',
+};
+
+export function pageLabelKeys(url) {
+    const segment = url.split('/')[2];
+    if (url.startsWith('/uikit/') && uikitLabelKeys[segment]) {
+        return { group: 'nav.uikit', current: uikitLabelKeys[segment] };
+    }
+    return { group: 'nav.dashboards', current: 'nav.dashboard' };
+}
+
 export function useLayout() {
     const toggleDarkMode = () => {
         if (!document.startViewTransition) {

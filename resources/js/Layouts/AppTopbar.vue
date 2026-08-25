@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { useLayout } from './composables/layout';
+import { pageLabelKeys, useLayout } from './composables/layout';
 import { router, usePage } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 
@@ -15,6 +15,8 @@ const logout = () => {
 
 const userMenuOpen = ref(false);
 const notificationsOpen = ref(false);
+
+const pageTitle = computed(() => t(pageLabelKeys(page.url).current));
 </script>
 
 <template>
@@ -27,16 +29,7 @@ const notificationsOpen = ref(false);
                 <i class="pi pi-bars"></i>
             </button>
             <span class="topbar-separator hidden sm:block"></span>
-            <div class="page-title hidden sm:flex items-center gap-2 text-sm">
-                <span><i class="pi pi-home text-surface-400 text-xs"></i></span>
-                <div class="flex items-center gap-2 text-surface-400 font-normal">
-                    <span class="leading-none">{{ t('nav.dashboards') }}</span>
-                    <span><i class="pi pi-chevron-right !text-[10px] !leading-none"></i></span>
-                </div>
-                <div class="flex items-center gap-2 text-surface-950 dark:text-surface-0 font-medium">
-                    <span class="leading-none">{{ t('nav.dashboard') }}</span>
-                </div>
-            </div>
+            <span class="page-title hidden sm:block">{{ pageTitle }}</span>
         </div>
 
         <div class="topbar-right">
