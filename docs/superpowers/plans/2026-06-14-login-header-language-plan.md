@@ -218,8 +218,8 @@
 
   With the dev server running, open `http://localhost:8000/auth/login`:
   - Confirm the dropdown shows the current language.
-  - Switch to English and verify the page reloads with English labels (`Welcome to ICMS!`, `Email`, `Password`, `Sign In`).
-  - Switch to Chinese and verify the page reloads with Chinese labels (`欢迎来到 ICMS!`, `邮箱`, `密码`, `登录`).
+  - Switch to English and verify the page reloads with English labels (`Welcome to IMS!`, `Email`, `Password`, `Sign In`).
+  - Switch to Chinese and verify the page reloads with Chinese labels (`欢迎来到 IMS!`, `邮箱`, `密码`, `登录`).
   - Refresh the page and confirm the selected language persists.
 
 - [ ] **Step 5: Commit**

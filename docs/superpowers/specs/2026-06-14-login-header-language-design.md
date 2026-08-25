@@ -2,7 +2,7 @@
 
 ## Goal
 
-Add a branded header logo and a language switcher to the `/auth/login` page of the ICMS Laravel + Inertia + Vue application.
+Add a branded header logo and a language switcher to the `/auth/login` page of the IMS Laravel + Inertia + Vue application.
 
 ## Context
 
