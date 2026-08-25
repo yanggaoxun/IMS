@@ -499,7 +499,9 @@ function onContextRightClick(event) {
                     <h3 class="font-semibold text-lg">Overlay Menu</h3>
                 </div>
                 <Menu ref="menu" :model="overlayMenuItems" :popup="true" />
-                <Button type="button" label="Options" icon="pi pi-angle-down" @click="toggleMenu" style="width: auto" />
+                <div>
+                    <Button type="button" label="Options" icon="pi pi-angle-down" @click="toggleMenu" />
+                </div>
             </div>
 
             <div class="card" @contextmenu="onContextRightClick">

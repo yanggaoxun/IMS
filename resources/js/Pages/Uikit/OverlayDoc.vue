@@ -87,7 +87,9 @@ function confirm(event) {
                         <Button label="Save" @click="close" />
                     </template>
                 </Dialog>
-                <Button label="Show" style="width: auto" @click="open" />
+                <div>
+                    <Button label="Show" @click="open" />
+                </div>
             </div>
 
             <div class="card">
@@ -105,7 +107,7 @@ function confirm(event) {
                                 </template>
                             </Column>
                             <Column field="price" header="Price" sortable style="min-width: 8rem">
-                                <template #body="slotProps">; $ {{ slotProps.data.price }} </template>
+                                <template #body="slotProps">${{ slotProps.data.price }}</template>
                             </Column>
                         </DataTable>
                     </Popover>
@@ -162,11 +164,13 @@ function confirm(event) {
                     </p>
                 </Drawer>
 
-                <Button icon="pi pi-arrow-right" @click="visibleLeft = true" style="margin-right: 0.25em" />
-                <Button icon="pi pi-arrow-left" @click="visibleRight = true" style="margin-right: 0.25em" />
-                <Button icon="pi pi-arrow-down" @click="visibleTop = true" style="margin-right: 0.25em" />
-                <Button icon="pi pi-arrow-up" @click="visibleBottom = true" style="margin-right: 0.25em" />
-                <Button icon="pi pi-external-link" @click="visibleFull = true" />
+                <div class="flex flex-wrap gap-2">
+                    <Button icon="pi pi-arrow-right" @click="visibleLeft = true" />
+                    <Button icon="pi pi-arrow-left" @click="visibleRight = true" />
+                    <Button icon="pi pi-arrow-down" @click="visibleTop = true" />
+                    <Button icon="pi pi-arrow-up" @click="visibleBottom = true" />
+                    <Button icon="pi pi-external-link" @click="visibleFull = true" />
+                </div>
             </div>
 
             <div class="card">
@@ -174,14 +178,18 @@ function confirm(event) {
                     <h3 class="font-semibold text-lg">ConfirmPopup</h3>
                 </div>
                 <ConfirmPopup></ConfirmPopup>
-                <Button ref="popup" @click="confirm($event)" icon="pi pi-check" label="Confirm" class="mr-2"></Button>
+                <div>
+                    <Button ref="popup" @click="confirm($event)" icon="pi pi-check" label="Confirm"></Button>
+                </div>
             </div>
 
             <div class="card">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-semibold text-lg">ConfirmDialog</h3>
                 </div>
-                <Button label="Delete" icon="pi pi-trash" severity="danger" style="width: auto" @click="openConfirmation" />
+                <div>
+                    <Button label="Delete" icon="pi pi-trash" severity="danger" @click="openConfirmation" />
+                </div>
                 <Dialog header="Confirmation" v-model:visible="displayConfirmation" :style="{ width: '350px' }" :modal="true">
                     <div class="flex items-center justify-center">
                         <i class="pi pi-exclamation-triangle mr-4" style="font-size: 2rem" />
