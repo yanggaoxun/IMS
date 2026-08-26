@@ -1,9 +1,15 @@
 <script setup>
 import { computed } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import { useI18n } from 'vue-i18n';
 import AppMenuItem from './AppMenuItem.vue';
 
 const { t } = useI18n();
+const page = usePage();
+
+// 当前登录用户的权限列表（由 HandleInertiaRequests 共享）
+const permissions = computed(() => page.props.auth?.user?.permissions ?? []);
+const can = (permission) => !permission || permissions.value.includes(permission);
 
 const model = computed(() => [
     {
@@ -17,7 +23,8 @@ const model = computed(() => [
         label: t('nav.system'),
         icon: 'pi pi-cog',
         items: [
-            { label: t('nav.users'), icon: 'pi pi-fw pi-users', to: '/users' },
+            { label: t('nav.users'), icon: 'pi pi-fw pi-users', to: '/users', permission: 'users.view' },
+            { label: t('nav.roles'), icon: 'pi pi-fw pi-shield', to: '/roles', permission: 'roles.manage' },
         ],
     },
     {
@@ -40,7 +47,10 @@ const model = computed(() => [
             { label: t('nav.timeline'), icon: 'pi pi-fw pi-calendar', to: '/uikit/timeline' },
         ],
     },
-]);
+].map((group) => ({
+    ...group,
+    items: group.items.filter((item) => can(item.permission)),
+})).filter((group) => group.items.length > 0));
 </script>
 
 <template>

@@ -44,6 +44,9 @@ export function pageLabelKeys(url) {
     if (url.startsWith('/users')) {
         return { group: 'nav.system', current: 'nav.users' };
     }
+    if (url.startsWith('/roles')) {
+        return { group: 'nav.system', current: 'nav.roles' };
+    }
     const segment = url.split('/')[2];
     if (url.startsWith('/uikit/') && uikitLabelKeys[segment]) {
         return { group: 'nav.uikit', current: uikitLabelKeys[segment] };

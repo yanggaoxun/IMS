@@ -7,6 +7,7 @@ import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
     users: Object,
+    roles: Array,
     filters: Object,
 });
 
@@ -33,6 +34,7 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    role: null,
 });
 
 const openCreate = () => {
@@ -44,7 +46,7 @@ const openCreate = () => {
 
 const openEdit = (user) => {
     editingUser.value = user;
-    form.defaults({ name: user.name, email: user.email, password: '', password_confirmation: '' });
+    form.defaults({ name: user.name, email: user.email, password: '', password_confirmation: '', role: user.roles[0]?.name ?? null });
     form.reset();
     form.clearErrors();
     dialogVisible.value = true;
@@ -117,6 +119,11 @@ const onPage = (event) => {
                 <Column field="id" header="ID" style="width: 5rem" />
                 <Column field="name" :header="t('users.name')" />
                 <Column field="email" :header="t('users.email')" />
+                <Column :header="t('users.role')">
+                    <template #body="{ data }">
+                        <Tag v-if="data.roles.length" :value="data.roles[0].name" :severity="data.roles[0].name === 'admin' ? 'warn' : 'info'" />
+                    </template>
+                </Column>
                 <Column field="created_at" :header="t('users.createdAt')">
                     <template #body="{ data }">{{ data.created_at?.slice(0, 10) }}</template>
                 </Column>
@@ -161,6 +168,11 @@ const onPage = (event) => {
                 <label for="user-password-confirm" class="text-sm font-medium">{{ t('users.passwordConfirm') }}</label>
                 <Password id="user-password-confirm" v-model="form.password_confirmation" :feedback="false" toggleMask :invalid="!!form.errors.password_confirmation" class="w-full" inputClass="w-full" />
                 <small v-if="form.errors.password_confirmation" class="text-red-500">{{ form.errors.password_confirmation }}</small>
+            </div>
+            <div class="flex flex-col gap-1.5">
+                <label for="user-role" class="text-sm font-medium">{{ t('users.role') }}</label>
+                <Select id="user-role" v-model="form.role" :options="roles" optionLabel="name" optionValue="name" :placeholder="t('users.rolePlaceholder')" :invalid="!!form.errors.role" class="w-full" />
+                <small v-if="form.errors.role" class="text-red-500">{{ form.errors.role }}</small>
             </div>
             <div class="flex justify-end gap-2">
                 <Button type="button" :label="t('common.cancel')" severity="secondary" outlined @click="dialogVisible = false" />
