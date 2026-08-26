@@ -53,6 +53,20 @@ export default {
         deleteConfirm: '确定要删除角色「{name}」吗？',
         adminLocked: 'admin 角色受保护，不能删除或改名',
     },
+    permissions: {
+        modules: {
+            users: '用户管理',
+            roles: '角色管理',
+            other: '其他',
+        },
+        actions: {
+            view: '查看',
+            create: '新建',
+            update: '编辑',
+            delete: '删除',
+            manage: '管理',
+        },
+    },
     dashboard: {
         title: '仪表盘',
         generalSales: '总销售额',

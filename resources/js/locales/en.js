@@ -53,6 +53,20 @@ export default {
         deleteConfirm: 'Delete role "{name}"?',
         adminLocked: 'The admin role is protected',
     },
+    permissions: {
+        modules: {
+            users: 'Users',
+            roles: 'Roles',
+            other: 'Other',
+        },
+        actions: {
+            view: 'View',
+            create: 'Create',
+            update: 'Update',
+            delete: 'Delete',
+            manage: 'Manage',
+        },
+    },
     dashboard: {
         title: 'Dashboard',
         generalSales: 'General Sales',

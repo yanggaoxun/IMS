@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { router, useForm } from '@inertiajs/vue3';
 import { useToast } from 'primevue/usetoast';
 import { useConfirm } from 'primevue/useconfirm';
@@ -10,12 +10,37 @@ const props = defineProps({
     permissions: Array,
 });
 
-const { t } = useI18n();
+const { t, te } = useI18n();
 const toast = useToast();
 const confirm = useConfirm();
 
 const dialogVisible = ref(false);
 const editingRole = ref(null);
+
+// 权限按「模块.动作」转成树：父节点=模块，子节点=权限
+const permissionTree = computed(() => {
+    const groups = {};
+    for (const p of props.permissions) {
+        const dot = p.name.indexOf('.');
+        const module = dot === -1 ? 'other' : p.name.slice(0, dot);
+        (groups[module] ??= []).push(p);
+    }
+
+    return Object.entries(groups).map(([module, perms]) => ({
+        key: `module:${module}`,
+        label: te(`permissions.modules.${module}`) ? t(`permissions.modules.${module}`) : module,
+        children: perms.map((p) => {
+            const action = p.name.slice(p.name.indexOf('.') + 1);
+            return {
+                key: p.name,
+                label: te(`permissions.actions.${action}`) ? t(`permissions.actions.${action}`) : p.name,
+            };
+        }),
+    }));
+});
+
+// PrimeVue Tree checkbox 的绑定格式：{ [key]: { checked, partialChecked } }
+const selectionKeys = ref({});
 
 const form = useForm({
     name: '',
@@ -24,6 +49,7 @@ const form = useForm({
 
 const openCreate = () => {
     editingRole.value = null;
+    selectionKeys.value = {};
     form.defaults({ name: '', permissions: [] });
     form.reset();
     form.clearErrors();
@@ -32,9 +58,20 @@ const openCreate = () => {
 
 const openEdit = (role) => {
     editingRole.value = role;
+    const selected = new Set(role.permissions.map((p) => p.name));
+    const keys = Object.fromEntries([...selected].map((name) => [name, { checked: true, partialChecked: false }]));
+    // 父节点状态：全选→checked，部分→partialChecked（Tree 不自动回填父级状态）
+    for (const group of permissionTree.value) {
+        const total = group.children.length;
+        const count = group.children.filter((c) => selected.has(c.key)).length;
+        if (count > 0) {
+            keys[group.key] = { checked: count === total, partialChecked: count < total };
+        }
+    }
+    selectionKeys.value = keys;
     form.defaults({
         name: role.name,
-        permissions: role.permissions.map((p) => p.name),
+        permissions: [...selected],
     });
     form.reset();
     form.clearErrors();
@@ -42,6 +79,11 @@ const openEdit = (role) => {
 };
 
 const submit = () => {
+    // 只提交 checked 的叶子节点（权限名），父节点 key 带 module: 前缀需排除
+    form.permissions = Object.entries(selectionKeys.value)
+        .filter(([key, state]) => state.checked && !key.startsWith('module:'))
+        .map(([key]) => key);
+
     const options = {
         preserveScroll: true,
         onSuccess: () => {
@@ -121,12 +163,12 @@ const confirmDelete = (role) => {
             </div>
             <div class="flex flex-col gap-1.5">
                 <span class="text-sm font-medium">{{ t('roles.permissions') }}</span>
-                <div class="flex flex-col gap-2">
-                    <div v-for="p in permissions" :key="p.id" class="flex items-center gap-2">
-                        <Checkbox v-model="form.permissions" :inputId="`perm-${p.id}`" :value="p.name" />
-                        <label :for="`perm-${p.id}`">{{ p.name }}</label>
-                    </div>
-                </div>
+                <Tree
+                    v-model:selectionKeys="selectionKeys"
+                    :value="permissionTree"
+                    selectionMode="checkbox"
+                    class="w-full !p-2"
+                />
                 <small v-if="form.errors.permissions" class="text-red-500">{{ form.errors.permissions }}</small>
             </div>
             <div class="flex justify-end gap-2">
