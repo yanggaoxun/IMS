@@ -14,6 +14,18 @@ const { t, te } = useI18n();
 const toast = useToast();
 const confirm = useConfirm();
 
+// 「users.view」→「用户管理 · 查看」，无词条时原样显示
+const permissionLabel = (name) => {
+    const dot = name.indexOf('.');
+    if (dot === -1) return name;
+    const module = name.slice(0, dot);
+    const action = name.slice(dot + 1);
+    const moduleLabel = te(`permissions.modules.${module}`) ? t(`permissions.modules.${module}`) : module;
+    const actionLabel = te(`permissions.actions.${action}`) ? t(`permissions.actions.${action}`) : action;
+
+    return `${moduleLabel} · ${actionLabel}`;
+};
+
 const dialogVisible = ref(false);
 const editingRole = ref(null);
 
@@ -132,7 +144,7 @@ const confirmDelete = (role) => {
                 <Column :header="t('roles.permissions')">
                     <template #body="{ data }">
                         <div class="flex flex-wrap gap-1">
-                            <Tag v-for="p in data.permissions" :key="p.id" :value="p.name" severity="info" />
+                            <Tag v-for="p in data.permissions" :key="p.id" :value="permissionLabel(p.name)" severity="info" />
                             <span v-if="!data.permissions.length" class="text-muted-color">{{ t('roles.noPermissions') }}</span>
                         </div>
                     </template>
