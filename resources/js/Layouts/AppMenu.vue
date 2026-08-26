@@ -14,6 +14,13 @@ const model = computed(() => [
         ],
     },
     {
+        label: t('nav.system'),
+        icon: 'pi pi-cog',
+        items: [
+            { label: t('nav.users'), icon: 'pi pi-fw pi-users', to: '/users' },
+        ],
+    },
+    {
         label: t('nav.uikit'),
         icon: 'pi pi-star-fill',
         items: [
