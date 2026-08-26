@@ -25,3 +25,6 @@ Thumbs.db
 
 # Superpowers AI workflow docs
 docs/superpowers/
+
+# Local agent guide (not for repo)
+AGENTS.md
