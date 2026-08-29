@@ -1,0 +1,16 @@
+.git
+node_modules
+vendor
+.env
+.dockerignore
+Dockerfile
+docker-compose.yml
+public/build
+public/hot
+bootstrap/cache/*.php
+storage/logs/*
+storage/pail
+tests
+*.md
+.phpunit.result.cache
+.DS_Store

@@ -6,11 +6,14 @@
 
 | 层 | 技术 |
 |----|------|
-| 后端 | Laravel 12, PHP ^8.2 |
+| 后端 | Laravel 12, PHP ^8.2, Laravel Octane (FrankenPHP) |
 | 前端 | Vue 3 (Composition API), Inertia.js, PrimeVue 4, Tailwind CSS 4 |
+| RBAC | spatie/laravel-permission（角色/权限/菜单过滤） |
 | 构建 | Vite 7, unplugin-vue-components（PrimeVue 组件自动导入） |
 | 国际化 | vue-i18n（中文/英文），Laravel 翻译 |
 | 测试 | PHPUnit 11 |
+| CI/CD | Woodpecker CI → Harbor（`.woodpecker.yml`） |
+| 部署 | Docker（多阶段 Dockerfile，FrankenPHP 运行时） |
 
 ## 快速开始
 
@@ -20,6 +23,23 @@ composer dev      # 开发：server + queue + logs + vite 一条命令全起
 composer test     # 测试
 npm run build     # 生产构建
 ```
+
+## Docker 方式启动（类生产）
+
+```bash
+cp .env.example .env   # 按需修改数据库等配置
+docker compose up -d --build
+# 应用监听 http://localhost:8000（FrankenPHP + Octane）
+```
+
+## CI/CD
+
+推送到 `develop` 或 `main` 触发 Woodpecker 流水线（`.woodpecker.yml`）：
+
+1. `composer install` + `php artisan test`
+2. 构建 Docker 镜像并推送到 Harbor：`8.148.225.109:8080/ci/ims:<短sha>` 和 `:latest`
+
+需要在 Woodpecker 仓库设置里配置 secrets：`harbor_username` / `harbor_password`（Harbor 机器人账号）。流水线不自动部署，部署时到目标机器 `docker pull` 后用 `docker compose up -d` 拉起。
 
 ## 基于此模板开新项目
 
@@ -31,32 +51,27 @@ npm run build     # 生产构建
 ## 目录结构
 
 ```
-app/Http/Controllers/        # LoginController, ProfileController
+app/Http/Controllers/        # LoginController, ProfileController, UserController, RoleController
 app/Http/Middleware/         # HandleInertiaRequests, SetLocale
 resources/js/
-  Pages/                     # Inertia 页面（Dashboard, Profile, Error, Auth/*, Uikit/*）
+  Pages/                     # Inertia 页面（Dashboard, Profile, Error, Auth/*, Users/, Roles/, Uikit/*）
   Layouts/                   # AppLayout, AuthLayout, AppTopbar, AppSidebar, composables/layout.js
   components/                # 通用组件 + dashboard/ 演示 widget
   locales/{zh,en}.js         # 前端 i18n 文案
   theme/avalon-preset.js     # PrimeVue 主题预设
 resources/css/avalon/layout/ # 布局 SCSS（浅色）
 routes/web.php               # 全部路由
+Dockerfile                   # 多阶段：assets → vendor → FrankenPHP 运行时
+.woodpecker.yml              # CI 流水线
+docker-compose.yml           # 类生产启动
 ```
-
-## 开发规范
-
-- **新增页面**：`Pages/` 下建 `.vue` 文件（自动套用 AppLayout）→ `routes/web.php` 加路由 → 如需菜单，在 `Layouts/AppMenu.vue` 加项并在 `locales` 加 `nav.*` 文案；顶栏标题和面包屑会自动跟随路由
-- **样式**：卡片用 `.card` / `.card-header` / `.card-body`；颜色用 PrimeVue 主题变量或 Tailwind 工具类；模板只支持浅色模式
-- **文案**：一律走 `useI18n()`，不要硬编码
-- **导航**：内部跳转用 `@inertiajs/vue3` 的 `Link`，不要引入 Vue Router
 
 ## 内置功能
 
 - 登录 / 登出（仅认证，不含注册、忘记密码）
 - 个人资料页（改姓名/邮箱/密码）：`/profile`
+- 用户管理 `/users`、角色权限管理 `/roles`（RBAC，菜单按权限过滤）
 - 中英双语切换
 - 主题换肤面板（主色 / surface / preset）
 - Inertia 错误页（403/404/500/503）
 - UI Kit 演示页 14 个（`/uikit/*`，作为组件用法参考）
-
-详细约定见 `AGENTS.md`。
