@@ -1,0 +1,33 @@
+# Woodpecker CI: 测试 → 构建镜像 → 推 Harbor（不自动部署）
+when:
+  - event: [push, manual]
+    branch: [develop, main]
+
+steps:
+  test:
+    image: composer:2
+    commands:
+      - composer install --no-interaction --prefer-dist
+      - php artisan test
+    environment:
+      APP_ENV: testing
+      APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+
+  docker:
+    image: docker:29-cli
+    depends_on: [test]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      HARBOR: 8.148.225.109:8080
+      IMAGE: 8.148.225.109:8080/ci/ims
+      harbor_username:
+        from_secret: harbor_username
+      harbor_password:
+        from_secret: harbor_password
+    commands:
+      - SHORT_SHA=$(echo "$CI_COMMIT_SHA" | cut -c1-8)
+      - echo "$harbor_password" | docker login $HARBOR -u "$harbor_username" --password-stdin
+      - docker build -t $IMAGE:$SHORT_SHA -t $IMAGE:latest .
+      - docker push $IMAGE:$SHORT_SHA
+      - docker push $IMAGE:latest

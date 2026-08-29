@@ -28,3 +28,10 @@ docs/superpowers/
 
 # Local agent guide (not for repo)
 AGENTS.md
+
+**/caddy
+frankenphp
+frankenphp-worker.php
+
+# Local server/CI docs with credentials
+服务器CICD部署文档.md
