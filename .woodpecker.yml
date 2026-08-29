@@ -7,7 +7,7 @@ steps:
   test:
     image: composer:2
     commands:
-      - composer install --no-interaction --prefer-dist
+      - composer install --no-interaction --prefer-dist --ignore-platform-reqs
       - php artisan test
     environment:
       APP_ENV: testing
